@@ -1,0 +1,54 @@
+# Core libraries
+numpy
+pandas
+opencv-python
+matplotlib
+scikit-learn
+tqdm
+albumentations
+
+# Deep Learning frameworks
+torch
+torchvision
+torchaudio
+tensorflow
+
+
+# Model training utilities
+lightning
+tensorboard
+onnx
+onnxruntime
+pyyaml
+
+# Object Detection & Segmentation
+ultralytics   # for YOLOv8
+
+
+# Image augmentation
+imgaug
+albumentations
+
+# Image loading & preprocessing
+Pillow
+scikit-image
+imageio
+
+# Annotation & COCO support
+pycocotools
+labelme
+
+# Visualization
+seaborn
+opencv-python-headless
+plotly
+gradio
+
+# Utility tools
+requests
+pydantic
+rich
+
+# Jupyter support
+jupyterlab
+ipykernel
