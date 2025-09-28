@@ -39,7 +39,7 @@ class LinearClassifier(object):
         Outputs:
         A list containing the value of the loss function at each training iteration.
         """
-        num_train, dim = X.shape
+        num_train, dim = X.shape #(N,D)
         num_classes = (
             np.max(y) + 1
         )  # assume y takes values 0...K-1 where K is number of classes
@@ -64,7 +64,9 @@ class LinearClassifier(object):
             # Hint: Use np.random.choice to generate indices. Sampling with         #
             # replacement is faster than sampling without replacement.              #
             #########################################################################
-
+            indices = np.random.choice(num_train, batch_size)
+            X_batch = X[indices]
+            y_batch = y[indices]
 
             # evaluate loss and gradient
             loss, grad = self.loss(X_batch, y_batch, reg)
@@ -75,7 +77,7 @@ class LinearClassifier(object):
             # TODO:                                                                 #
             # Update the weights using the gradient and the learning rate.          #
             #########################################################################
-
+            self.W -= learning_rate * grad
 
             if verbose and it % 100 == 0:
                 print("iteration %d / %d: loss %f" % (it, num_iters, loss))
@@ -101,8 +103,8 @@ class LinearClassifier(object):
         # TODO:                                                                   #
         # Implement this method. Store the predicted labels in y_pred.            #
         ###########################################################################
-
-        return y_pred
+        logits = X @ self.W
+        return np.argmax(logits, axis=1)
 
     def loss(self, X_batch, y_batch, reg):
         """
@@ -139,13 +141,6 @@ class LinearClassifier(object):
         self.W = params["W"]
         print(fname, "loaded.")
         return True
-
-
-class LinearSVM(LinearClassifier):
-    """ A subclass that uses the Multiclass SVM loss function """
-
-    def loss(self, X_batch, y_batch, reg):
-        return svm_loss_vectorized(self.W, X_batch, y_batch, reg)
 
 
 class Softmax(LinearClassifier):
